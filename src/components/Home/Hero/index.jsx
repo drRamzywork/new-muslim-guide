@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from './index.module.scss'
+import Link from 'next/link'
 
 
 const Hero = () => {
@@ -15,9 +16,9 @@ const Hero = () => {
 
 
           <div className={styles.text_container}>
-            <div className={styles.title}>
+            <Link href={'/preliminaries'} className={styles.title}>
               <h2>Preliminaries</h2>
-            </div>
+            </Link>
             <div className={styles.desc}>
               <p>How to Find out about the Rulings of Islam</p>
             </div>

@@ -7,6 +7,7 @@ const Navbar = () => {
   return (
     <>
       <nav id='navbar' className={styles.navbar}>
+
         <div className="container">
           <div className={styles.sec_container}>
             <div className={styles.logo}>
@@ -30,6 +31,7 @@ const Navbar = () => {
               </div>
             </div>
           </div>
+
           {pathname === '/' &&
             <div className={styles.search}>
               <div className={styles.input_container}>

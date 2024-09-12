@@ -8,6 +8,8 @@ section.preliminaries {
         text-align: center;
         margin: 0;
         margin-bottom: 29px;
+        font-size: 22px;
+        font-weight: 600;
       }
     }
 
@@ -16,6 +18,8 @@ section.preliminaries {
       flex-direction: column;
       gap: 27px;
       .box {
+        text-decoration: none;
+        color: unset;
         position: relative;
         .img_container {
           img {
