@@ -1,7 +1,9 @@
 import React from 'react'
 import { IoIosSearch } from "react-icons/io";
 import styles from './index.module.scss'
+import { useRouter } from 'next/router';
 const Navbar = () => {
+  const { pathname } = useRouter()
   return (
     <>
       <nav id='navbar' className={styles.navbar}>
@@ -28,17 +30,18 @@ const Navbar = () => {
               </div>
             </div>
           </div>
+          {pathname === '/' &&
+            <div className={styles.search}>
+              <div className={styles.input_container}>
 
-          <div className={styles.search}>
-            <div className={styles.input_container}>
+                <input type="text" />
+                <div className={styles.icon_container}>
+                  <IoIosSearch />
+                </div>
 
-              <input type="text" />
-              <div className={styles.icon_container}>
-                <IoIosSearch />
               </div>
-
             </div>
-          </div>
+          }
 
         </div>
       </nav>
