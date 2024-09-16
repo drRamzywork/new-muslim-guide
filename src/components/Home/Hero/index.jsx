@@ -1,17 +1,24 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './index.module.scss'
 import Link from 'next/link'
 
 
 const Hero = () => {
+  const [isImg_1Active, setIsImg_1Active] = useState(false);
+  const [isImg_2Active, setIsImg_2Active] = useState(false);
 
+  useEffect(() => {
+    setIsImg_1Active(true)
+    setIsImg_2Active(true)
+  }, [])
   return (
     <section id='hero' className={styles.hero}>
       <div className="container">
 
         <div className={styles.sec_container}>
           <div className={styles.img_container}>
-            <img src="/assets/svgs/herobg.svg" alt="" />
+            <img className={`${styles.img_1} ${isImg_1Active && styles.active}`} src="/assets/svgs/img_1.svg" alt="" />
+            <img className={`${styles.img_2} ${isImg_2Active && styles.active}`} src="/assets/svgs/img_2.svg" alt="" />
           </div>
 
 

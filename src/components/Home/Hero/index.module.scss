@@ -7,12 +7,46 @@ section.hero {
       margin-top: -130px;
       z-index: 1;
       width: 100%;
-      height: 100%;
+      height: 275px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 35px;
+
       img {
-        border-radius: 35px;
         object-fit: cover;
         width: 100%;
         height: 100%;
+        transition: all 3.5s ease-in-out;
+        opacity: 0;
+      }
+
+      .img_1 {
+        width: 100vw;
+        object-fit: contain;
+        transform: scale(1.5);
+      }
+
+      .img_2 {
+        position: absolute;
+        bottom: -25px;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
+        transform: scale(1.4);
+      }
+
+      .img_1.active {
+        transform: scale(1.5) translateX(10px);
+      }
+      .img_2.active {
+        object-fit: contain;
+        transform: scale(1.4) translateX(-50px);
+      }
+
+      .img_1.active,
+      .img_2.active {
+        opacity: 1;
       }
     }
 
