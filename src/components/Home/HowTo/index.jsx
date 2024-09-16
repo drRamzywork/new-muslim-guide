@@ -17,6 +17,7 @@ const HowTo = () => {
                 <h4>How to Perform Wudoo?</h4>
               </div>
             </Link>
+
             <div className={styles.card}>
 
               <div className={styles.title}>
@@ -27,6 +28,7 @@ const HowTo = () => {
                 <ArrowRight />
               </div>
             </div>
+
           </div>
         </div>
       </section>

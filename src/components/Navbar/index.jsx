@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { IoIosSearch } from "react-icons/io";
 import styles from './index.module.scss'
 import { useRouter } from 'next/router';
+
 const Navbar = () => {
+  const [menulang, setMenuLang] = useState();
+  const [searchMenu, setSearchMenu] = useState();
+
   const { pathname } = useRouter()
   return (
     <>
