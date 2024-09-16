@@ -22,7 +22,7 @@ export default function App() {
         <meta name="csrf-token" content="JdDvDc4LUJomFM4T7QE0hFlH9CeKOHDXMoxV3wer" />
         <meta name="title" content="" />
         <link rel="icon" type="image/ico" href={`/${imagePath}`} />
-        <meta name="theme-color" content="#005d85" />
+        <meta name="theme-color" content="#cd5827" />
         <meta name="mobile-web-app-capable" content="no" />
         <meta name="application-name" content="New muslim guide" />
         <meta name="apple-mobile-web-app-capable" content="no" />
@@ -33,7 +33,7 @@ export default function App() {
         <meta name="author" content="New muslim guide" />
         <meta name="description" content={'Simple Rules and Important Islamic Guidelines for New Muslims in all Aspects of Life'} />
         <link rel="canonical" href={`https://tarteel.org.sa/`} />
-        <meta name="msapplication-TileColor" content="#005d85" />
+        <meta name="msapplication-TileColor" content="#cd5827" />
         <meta name="msapplication-TileImage" content={`https://new-muslim-guide.vercel.app/${imagePath}`} />
         <meta name="msapplication-square70x70logo" content={imagePath} />
         <meta name="msapplication-square150x150logo" content={imagePath} />
