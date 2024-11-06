@@ -66,6 +66,15 @@ footer.footer {
             font-size: 14px;
             font-weight: 600;
             color: #4b4b4b;
+
+            a {
+              color: unset;
+              text-decoration: none;
+
+              p {
+                margin: 0;
+              }
+            }
           }
         }
       }

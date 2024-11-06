@@ -6,15 +6,15 @@ import Sections2 from './sections2'
 import HowTo from './HowTo'
 import Footer from './Footer'
 
-const Home = () => {
+const Home = ({ dataAllCategories, dataPreliminaries, dataAllLangs }) => {
   return (
     <>
       <Navbar />
       <Hero />
-      <Sections />
-      <Sections2 />
+      <Sections dataPreliminaries={dataPreliminaries} />
+      <Sections2 dataAllCategories={dataAllCategories} />
       <HowTo />
-      <Footer />
+      <Footer dataAllLangs={dataAllLangs} dataAllCategories={dataAllCategories} />
 
     </>
   )

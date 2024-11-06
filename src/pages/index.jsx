@@ -1,6 +1,5 @@
 import Head from "next/head";
 import { Poppins } from "next/font/google";
-import styles from "@/styles/Home.module.css";
 import Home from "@/components/Home";
 
 const poppins = Poppins({
@@ -9,7 +8,7 @@ const poppins = Poppins({
   style: ["normal"],
 });
 
-export default function App() {
+export default function App({ dataAllSections, dataPreliminaries, dataAllCategories, dataAllLangs }) {
 
   const imagePath = '/favicon.ico'
   return (
@@ -61,9 +60,70 @@ export default function App() {
         <meta name="twitter:image:src" content={`https://new-muslim-guide.vercel.app/${imagePath}`} />
         <meta name="twitter:description" content={'Simple Rules and Important Islamic Guidelines for New Muslims in all Aspects of Life'} />
       </Head>
+
       <main className={` ${poppins.className}`}>
-        <Home />
+        <Home dataAllSections={dataAllSections} dataPreliminaries={dataPreliminaries} dataAllCategories={dataAllCategories} dataAllLangs={dataAllLangs} />
       </main>
+
     </>
   );
+}
+
+
+
+
+export async function getStaticProps({ locale }) {
+  const apiDomain = "https://newmuslimguide.rmz.one/api";
+
+  const resPreliminaries = await fetch(`${apiDomain}/preliminaries`, {
+    headers: {
+      'locale': locale
+    }
+  })
+  const dataPreliminaries = await resPreliminaries.json();
+
+  const resAllSections = await fetch(`${apiDomain}/categories`, {
+    headers: {
+      'locale': locale
+    }
+  })
+  const dataAllSections = await resAllSections.json();
+
+
+  const resAllLangs = await fetch(`${apiDomain}/languages`, {
+    headers: {
+      'locale': locale
+    }
+  })
+  const dataAllLangs = await resAllLangs.json();
+
+  const resAllSettings = await fetch(`${apiDomain}/items`, {
+    headers: {
+      'locale': locale
+    }
+  })
+  const dataAllSettings = await resAllSettings.json();
+
+
+  const resDataAllCategories = await fetch(`https://iiacademy.net/api/categories`, {
+    method: 'GET',
+    headers: {
+      "locale": locale,
+    },
+
+  });
+  const dataAllCategories = await resDataAllCategories.json()
+
+
+  return {
+    props: {
+      dataAllSections: dataAllSections?.data,
+      dataPreliminaries: dataPreliminaries?.data[0],
+      dataAllLangs: dataAllLangs?.data,
+      dataAllSettings: dataAllSettings?.data,
+      dataAllCategories: dataAllCategories.data || [],
+
+    },
+    revalidate: 10
+  };
 }

@@ -49,7 +49,7 @@ const breakpoints = {
   },
 };
 
-const Sections = () => {
+const Sections = ({ dataPreliminaries }) => {
   const swiperRef = useRef(null);
   const [activeSlide, setActiveSlide] = useState(0);
 
@@ -61,6 +61,8 @@ const Sections = () => {
     swiperRef?.current?.slideTo(index);
     setActiveSlide(index);
   };
+
+  console.log(dataPreliminaries, "dataPreliminaries")
 
   return (
     <>
@@ -85,7 +87,7 @@ const Sections = () => {
                 nextEl: '.right_arrow',
               }}
             >
-              {data.map((box, index) => (
+              {dataPreliminaries?.posts?.map((box, index) => (
                 <SwiperSlide key={index} >
                   <div onClick={() => handleSlideClick(index)} className={`${styles.box} ${activeSlide === index ? styles.active : ''}`}>
                     <img src={box.icon} alt="" />
@@ -111,11 +113,11 @@ const Sections = () => {
                     <div className={styles.num}>
 
                       <span>
-                        1
+                        {activeSlide}
                       </span>
 
                     </div>
-                    <h3>Your Faith</h3>
+                    <h3>{dataPreliminaries?.posts[activeSlide]?.title}</h3>
                   </div>
                 </div>
 

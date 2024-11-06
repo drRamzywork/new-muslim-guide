@@ -1,6 +1,13 @@
 import React from 'react'
 import styles from './index.module.scss'
-const Footer = () => {
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+const Footer = ({ dataAllLangs, dataAllCategories }) => {
+  const router = useRouter();
+  console.log(dataAllLangs, 'dataAllLangs');
+
+
+
   return (
     <footer id='footer' className={styles.footer}>
 
@@ -23,41 +30,37 @@ const Footer = () => {
                 <h5>sections</h5>
               </div>
               <ul>
-                <li>Preliminaries</li>
-                <li>Your Prayer</li>
-                <li>Your Fast</li>
-                <li>Your Pilgrimage</li>
-                <li>Your Financial Transactions</li>
-                <li>Your Food and Drink</li>
-                <li>Your Dress Code</li>
-                <li>Your New Life</li>
+                {dataAllCategories?.map((sec, idx) => (
+                  <li key={idx} onClick={() => setMenu(false)}>
+                    <Link href={sec.slug === "preliminaries" ? "/preliminaries" : `/section/${sec.slug}`}>
+                      <p>{sec.name}</p>
+                    </Link>
+                  </li>
+                ))}
+
+
               </ul>
             </div>
+
             <div className={styles.sec}>
               <ul>
-                <li>العربية</li>
-                <li>English</li>
-                <li>Filipino</li>
-                <li>Françaisርኛ</li>
-                <li>Bosanski</li>
-                <li>简体中文</li>
-                <li>Deutsch</li>
-                <li>Ελληνικά</li>
-                <li>Italiano</li>
-                <li>日本語</li>
-                <li>한국어</li>
-                <li>Nepali</li>
-                <li>Polski</li>
-                <li>Português</li>
-                <li>Română</li>
-                <li>Русский</li>
-                <li>Slovenščina</li>
-                <li>Español</li>
-                <li>Svenska</li>
-                <li>தமிழ்</li>
-                <li>Українська</li>
+
+                {Object.entries(dataAllLangs).map(([code, language]) => (
+                  <li key={code}>
+                    <a
+                      href={`/${code}${router.asPath}`}>{language?.native}
+                    </a>
+                  </li>
+                ))}
+
               </ul>
+
+
+
+
+
             </div>
+
           </div>
         </div>
       </div>

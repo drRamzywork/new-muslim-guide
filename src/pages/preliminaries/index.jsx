@@ -3,7 +3,7 @@ import React from 'react'
 import styles from './index.module.scss';
 import Link from 'next/link';
 
-const Preliminaries = () => {
+const Preliminaries = ({ dataAllCategories }) => {
   return (
     <>
       <Navbar />
@@ -51,3 +51,55 @@ const Preliminaries = () => {
 }
 
 export default Preliminaries
+
+
+
+export async function getStaticProps({ locale }) {
+
+  const resDataAllSections = await fetch(`https://iiacademy.net/api/preliminaries`, {
+    method: 'GET',
+    headers: {
+      "locale": locale,
+    },
+
+  });
+  const dataAllSections = await resDataAllSections.json()
+
+  const resDataAllLangs = await fetch(`https://iiacademy.net/api/languages`, {
+    method: 'GET',
+    headers: {
+      "locale": locale,
+    },
+
+  });
+  const dataAllLangs = await resDataAllLangs.json()
+
+  const resDataAllCategories = await fetch(`https://iiacademy.net/api/categories`, {
+    method: 'GET',
+    headers: {
+      "locale": locale,
+    },
+
+  });
+  const dataAllCategories = await resDataAllCategories.json()
+
+  const resDataAllSettings = await fetch(`https://iiacademy.net/api/settings`, {
+    method: 'GET',
+    headers: {
+      "locale": locale,
+    },
+
+  });
+  const dataAllSettings = await resDataAllSettings.json()
+
+  return {
+    props: {
+      dataAllSections: dataAllSections.data[0] || {},
+      dataAllLangs: dataAllLangs.data || [],
+      dataAllSettings: dataAllSettings.data || [],
+      dataAllCategories: dataAllCategories.data || [],
+    },
+    revalidate: 10,
+  }
+}
+
