@@ -62,7 +62,6 @@ const Sections = ({ dataPreliminaries }) => {
     setActiveSlide(index);
   };
 
-  console.log(dataPreliminaries, "dataPreliminaries")
 
   return (
     <>

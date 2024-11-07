@@ -6,7 +6,6 @@ const data = [{ title: 'Your Financial Transactions', img: '/assets/imgs/section
 
 const Sections2 = ({ dataAllCategories }) => {
 
-  console.log(dataAllCategories, "")
   return (
     <section id='sections2' className={styles.sections2}>
       <div className="container">

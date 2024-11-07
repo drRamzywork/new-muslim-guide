@@ -1,11 +1,16 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { IoIosSearch } from "react-icons/io";
 import styles from './index.module.scss'
 import { useRouter } from 'next/router';
+import { useMenu } from '@/contexts/MenuContext';
+import { IoIosClose } from "react-icons/io";
+import { TfiWorld } from "react-icons/tfi";
+import Link from 'next/link';
 
-const Navbar = () => {
-  const [menulang, setMenuLang] = useState();
-  const [searchMenu, setSearchMenu] = useState();
+const Navbar = ({ dataAllLangs }) => {
+  const router = useRouter();
+  const { menulang, setMenuLang, searchMenu, setSearchMenu } = useMenu();
+  const { locale } = useRouter()
 
   const { pathname } = useRouter()
   return (
@@ -14,14 +19,16 @@ const Navbar = () => {
 
         <div className="container">
           <div className={styles.sec_container}>
-            <div className={styles.logo}>
+            <Link href={'/'} className={styles.logo}>
               <img src="/assets/svgs/logo.svg" alt="" />
               <h1>new muslim guide</h1>
-            </div>
+            </Link>
 
             <div className={styles.btns_container}>
-              <div className={styles.btn}>
-                <p>en</p>
+
+
+              <div className={styles.btn} onClick={() => setMenuLang(true)}>
+                <p>{locale}</p>
               </div>
 
               <div className={styles.btn}>
@@ -51,6 +58,37 @@ const Navbar = () => {
 
         </div>
       </nav>
+
+
+
+
+      {menulang &&
+        <div className={styles.menu_container}>
+          <div className={styles.menu_nav}>
+            <div className={styles.close_btn} onClick={() => setMenuLang(false)}>
+              <IoIosClose />
+            </div>
+
+            <div className={styles.langs}>
+              <TfiWorld />
+
+            </div>
+          </div>
+          <ul>
+
+            {Object.entries(dataAllLangs).map(([code, language]) => (
+
+              <li key={code}>
+                <a href={`/${code}${router.asPath}`} className="box">
+                  <p>{language?.native}</p>
+                  <div className={`${styles.circle} ${code === locale && styles.active}`} />
+                </a>
+              </li>
+            ))}
+
+          </ul>
+        </div>
+      }
     </>
   )
 }

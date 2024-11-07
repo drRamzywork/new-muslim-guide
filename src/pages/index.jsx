@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { Poppins } from "next/font/google";
 import Home from "@/components/Home";
+import { useMenu } from "@/contexts/MenuContext";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -8,7 +9,10 @@ const poppins = Poppins({
   style: ["normal"],
 });
 
-export default function App({ dataAllSections, dataPreliminaries, dataAllCategories, dataAllLangs }) {
+export default function App({ dataAllSections, dataPreliminaries, dataAllCategories, dataAllLangs, }) {
+
+
+  const { menulang, setMenuLang, searchMenu, setSearchMenu } = useMenu();
 
   const imagePath = '/favicon.ico'
   return (
@@ -63,7 +67,11 @@ export default function App({ dataAllSections, dataPreliminaries, dataAllCategor
 
       <main className={` ${poppins.className}`}>
         <Home dataAllSections={dataAllSections} dataPreliminaries={dataPreliminaries} dataAllCategories={dataAllCategories} dataAllLangs={dataAllLangs} />
+
       </main>
+
+
+
 
     </>
   );
@@ -105,7 +113,7 @@ export async function getStaticProps({ locale }) {
   const dataAllSettings = await resAllSettings.json();
 
 
-  const resDataAllCategories = await fetch(`https://iiacademy.net/api/categories`, {
+  const resDataAllCategories = await fetch(`${apiDomain}/categories`, {
     method: 'GET',
     headers: {
       "locale": locale,
@@ -122,7 +130,6 @@ export async function getStaticProps({ locale }) {
       dataAllLangs: dataAllLangs?.data,
       dataAllSettings: dataAllSettings?.data,
       dataAllCategories: dataAllCategories.data || [],
-
     },
     revalidate: 10
   };

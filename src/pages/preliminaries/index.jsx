@@ -2,11 +2,14 @@ import Navbar from '@/components/Navbar'
 import React from 'react'
 import styles from './index.module.scss';
 import Link from 'next/link';
+import { useMenu } from '@/contexts/MenuContext';
 
-const Preliminaries = ({ dataAllCategories }) => {
+const Preliminaries = ({ dataPreliminaries, dataAllLangs }) => {
+  const { menulang, setMenuLang, searchMenu, setSearchMenu } = useMenu();
+
   return (
     <>
-      <Navbar />
+      <Navbar dataAllLangs={dataAllLangs} />
       <section id='preliminaries' className={styles.preliminaries}>
         <div className="container">
 
@@ -16,15 +19,21 @@ const Preliminaries = ({ dataAllCategories }) => {
             </div>
 
             <div className={styles.boxes_container}>
-              <Link href={'/preliminaries/1'} className={styles.box}>
-                <div className={styles.img_container}>
-                  <img src="/assets/svgs/herobg.svg" alt="" />
-                </div>
-                <div className={styles.title}>
-                  <p>How to Find out about the Rulings of Islam</p>
-                </div>
-              </Link>
-              <Link href={'/preliminaries/2'} className={styles.box}>
+
+              {dataPreliminaries?.posts.map((post, idx) => (
+                <Link key={idx} href={'/preliminaries/1'} className={styles.box}>
+                  <div className={styles.img_container}>
+                    <img src={post.image} alt="" />
+                  </div>
+                  <div className={styles.title}>
+                    <p>{post.title}</p>
+                  </div>
+                </Link>
+
+              ))}
+
+
+              {/* <Link href={'/preliminaries/2'} className={styles.box}>
                 <div className={styles.img_container}>
                   <img src="/assets/imgs/bg2.png" alt="" />
                 </div>
@@ -39,42 +48,58 @@ const Preliminaries = ({ dataAllCategories }) => {
                 <div className={styles.title}>
                   <p>The Five Necessities</p>
                 </div>
-              </Link>
+              </Link> */}
             </div>
           </div>
 
         </div>
 
       </section>
+
+
+      {menulang &&
+        <div className={styles.layer} onClick={() => setMenuLang(false)} />
+      }
     </>
   )
 }
 
 export default Preliminaries
 
-
-
 export async function getStaticProps({ locale }) {
+  const apiDomain = "https://newmuslimguide.rmz.one/api";
 
-  const resDataAllSections = await fetch(`https://iiacademy.net/api/preliminaries`, {
-    method: 'GET',
+  const resPreliminaries = await fetch(`${apiDomain}/preliminaries`, {
     headers: {
-      "locale": locale,
-    },
+      'locale': locale
+    }
+  })
+  const dataPreliminaries = await resPreliminaries.json();
 
-  });
-  const dataAllSections = await resDataAllSections.json()
-
-  const resDataAllLangs = await fetch(`https://iiacademy.net/api/languages`, {
-    method: 'GET',
+  const resAllSections = await fetch(`${apiDomain}/categories`, {
     headers: {
-      "locale": locale,
-    },
+      'locale': locale
+    }
+  })
+  const dataAllSections = await resAllSections.json();
 
-  });
-  const dataAllLangs = await resDataAllLangs.json()
 
-  const resDataAllCategories = await fetch(`https://iiacademy.net/api/categories`, {
+  const resAllLangs = await fetch(`${apiDomain}/languages`, {
+    headers: {
+      'locale': locale
+    }
+  })
+  const dataAllLangs = await resAllLangs.json();
+
+  const resAllSettings = await fetch(`${apiDomain}/items`, {
+    headers: {
+      'locale': locale
+    }
+  })
+  const dataAllSettings = await resAllSettings.json();
+
+
+  const resDataAllCategories = await fetch(`${apiDomain}/categories`, {
     method: 'GET',
     headers: {
       "locale": locale,
@@ -83,23 +108,15 @@ export async function getStaticProps({ locale }) {
   });
   const dataAllCategories = await resDataAllCategories.json()
 
-  const resDataAllSettings = await fetch(`https://iiacademy.net/api/settings`, {
-    method: 'GET',
-    headers: {
-      "locale": locale,
-    },
-
-  });
-  const dataAllSettings = await resDataAllSettings.json()
 
   return {
     props: {
-      dataAllSections: dataAllSections.data[0] || {},
-      dataAllLangs: dataAllLangs.data || [],
-      dataAllSettings: dataAllSettings.data || [],
+      dataAllSections: dataAllSections?.data,
+      dataPreliminaries: dataPreliminaries?.data[0],
+      dataAllLangs: dataAllLangs?.data,
+      dataAllSettings: dataAllSettings?.data,
       dataAllCategories: dataAllCategories.data || [],
     },
-    revalidate: 10,
-  }
+    revalidate: 10
+  };
 }
-
