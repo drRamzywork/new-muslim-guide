@@ -89,6 +89,11 @@ const Navbar = ({ dataAllLangs }) => {
           </ul>
         </div>
       }
+
+
+      {menulang &&
+        <div className={styles.layer} onClick={() => setMenuLang(false)} />
+      }
     </>
   )
 }

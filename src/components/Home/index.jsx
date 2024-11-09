@@ -37,9 +37,7 @@ const Home = ({ dataAllCategories, dataPreliminaries, dataAllLangs }) => {
 
 
 
-      {menulang &&
-        <div className={styles.layer} onClick={() => setMenuLang(false)} />
-      }
+
       <div className="container">
 
         {/* <div className={"Hollaaaa"} dangerouslySetInnerHTML={{ __html: getPTagContent2(data) }} dir={'rtl'}></div> */}

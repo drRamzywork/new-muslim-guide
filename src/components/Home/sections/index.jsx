@@ -63,6 +63,8 @@ const Sections = ({ dataPreliminaries }) => {
   };
 
 
+  console.log(dataPreliminaries?.posts[activeSlide], 'dataPreliminaries')
+
   return (
     <>
       <section id='sections' className={styles.sections}>
@@ -106,13 +108,23 @@ const Sections = ({ dataPreliminaries }) => {
               <div className={styles.active_swiper}>
                 <div className={styles.header}>
                   <div className={styles.img_container}>
-                    <img src="/assets/imgs/image2.png" alt="" />
+                    <img src={dataPreliminaries?.posts[activeSlide]?.image} alt="" />
+
+                    <div
+                      className={styles.background_image}>
+
+                      <img
+                        src={dataPreliminaries?.posts[activeSlide]?.image}
+                        alt="Background"
+                      />
+                    </div>
+
                   </div>
                   <div className={styles.title}>
                     <div className={styles.num}>
 
                       <span>
-                        {activeSlide}
+                        {activeSlide + 1}
                       </span>
 
                     </div>
