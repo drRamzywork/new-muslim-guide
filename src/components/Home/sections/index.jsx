@@ -133,7 +133,10 @@ const Sections = ({ dataPreliminaries }) => {
                 </div>
 
                 <div className={styles.desc}>
-                  <p>All divine messages, which the prophets brought to their people, called to the worship of Allah alone without associating anyone in worship with Him and to reject all false deities. In fact, this is the exact meaning of the testimony of faith through which one enters the fold of Islam by pronouncing it.</p>
+                  {/* <p>All divine messages, which the prophets brought to their people, called to the worship of Allah alone without associating anyone in worship with Him and to reject all false deities. In fact, this is the exact meaning of the testimony of faith through which one enters the fold of Islam by pronouncing it.</p> */}
+
+                  <p>{dataPreliminaries?.posts[activeSlide]?.description}</p>
+
                 </div>
 
                 <div className={styles.btn}>

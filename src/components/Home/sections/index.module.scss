@@ -14,6 +14,8 @@ section.sections {
         justify-content: center;
         padding: 11px 24px 12px;
         border: 1px solid #c9c9c9;
+
+        transition: all 0.3s ease-in-out;
         img {
           width: 24px;
           height: 24px;
@@ -23,12 +25,12 @@ section.sections {
         p {
           margin: 0;
           display: -webkit-box;
-          -webkit-line-clamp: 2; // Limits the text to 2 lines
+          -webkit-line-clamp: 2;
           -webkit-box-orient: vertical;
           overflow: hidden;
-          text-overflow: ellipsis; // Adds "..." at the end of the truncated text
-          max-height: 3em; // Adjust based on line-height (example: if line-height is 1.5em)
-          line-height: 1.5em; // Set line-height to control spacing between lines
+          text-overflow: ellipsis;
+          max-height: 3em;
+          line-height: 1.5em;
         }
       }
     }
@@ -36,6 +38,7 @@ section.sections {
       display: flex;
       align-items: center;
       justify-content: center;
+      min-height: 490px;
       .active_swiper {
         margin-top: 18px;
         margin-bottom: 18px;
@@ -47,6 +50,7 @@ section.sections {
         flex-direction: column;
         position: relative;
         z-index: 23;
+        height: 100%;
 
         &::after {
           position: absolute;
@@ -59,6 +63,8 @@ section.sections {
           z-index: -4;
           border-radius: 30px;
         }
+        width: 100%;
+
         .header {
           display: flex;
           width: 100%;

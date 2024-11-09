@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 const Footer = ({ dataAllLangs, dataAllCategories }) => {
   const router = useRouter();
-  console.log(dataAllLangs, 'dataAllLangs');
 
 
 
