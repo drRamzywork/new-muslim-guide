@@ -2,20 +2,19 @@ import React from 'react'
 import styles from './index.module.scss'
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-const Footer = ({ dataAllLangs, dataAllCategories }) => {
+const Footer = ({ dataAllLangs, dataAllCategories, dataAllSettings, dir }) => {
   const router = useRouter();
 
 
-
   return (
-    <footer id='footer' className={styles.footer}>
+    <footer id='footer' className={styles.footer} dir={dir}>
 
       <div className={styles.logo_container}>
         <div className="container">
           <div className={styles.logo}>
-            <img src="/assets/svgs/logo.svg" alt="" />
+            <img src={dataAllSettings?.site_logo} alt={dataAllSettings?.site_name} />
 
-            <h5>new muslim guide</h5>
+            <h5>{dataAllSettings?.site_name}</h5>
           </div>
         </div>
       </div>

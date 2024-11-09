@@ -7,7 +7,7 @@ import { IoIosClose } from "react-icons/io";
 import { TfiWorld } from "react-icons/tfi";
 import Link from 'next/link';
 
-const Navbar = ({ dataAllLangs }) => {
+const Navbar = ({ dataAllLangs, dataAllSettings, dir }) => {
   const router = useRouter();
   const { menulang, setMenuLang, searchMenu, setSearchMenu } = useMenu();
   const { locale } = useRouter()
@@ -15,13 +15,13 @@ const Navbar = ({ dataAllLangs }) => {
   const { pathname } = useRouter()
   return (
     <>
-      <nav id='navbar' className={styles.navbar}>
+      <nav id='navbar' className={styles.navbar} dir={dir}>
 
         <div className="container">
           <div className={styles.sec_container}>
             <Link href={'/'} className={styles.logo}>
-              <img src="/assets/svgs/logo.svg" alt="" />
-              <h1>new muslim guide</h1>
+              <img src={dataAllSettings?.site_logo} alt={dataAllSettings?.site_name} />
+              <h1>{dataAllSettings?.site_name}</h1>
             </Link>
 
             <div className={styles.btns_container}>
@@ -63,7 +63,7 @@ const Navbar = ({ dataAllLangs }) => {
 
 
       {menulang &&
-        <div className={styles.menu_container}>
+        <div className={styles.menu_container} dir={dir}>
           <div className={styles.menu_nav}>
             <div className={styles.close_btn} onClick={() => setMenuLang(false)}>
               <IoIosClose />

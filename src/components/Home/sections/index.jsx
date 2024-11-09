@@ -49,7 +49,7 @@ const breakpoints = {
   },
 };
 
-const Sections = ({ dataPreliminaries }) => {
+const Sections = ({ dataPreliminaries, dataAllWords }) => {
   const swiperRef = useRef(null);
   const [activeSlide, setActiveSlide] = useState(0);
 
@@ -63,7 +63,6 @@ const Sections = ({ dataPreliminaries }) => {
   };
 
 
-  console.log(dataPreliminaries?.posts[activeSlide], 'dataPreliminaries')
 
   return (
     <>
@@ -140,7 +139,7 @@ const Sections = ({ dataPreliminaries }) => {
                 </div>
 
                 <div className={styles.btn}>
-                  <p>Read more</p>
+                  <p>{dataAllWords?.read_more}</p>
                   <IoIosArrowForward />
                 </div>
 

@@ -10,7 +10,7 @@ import {
   motion
 
 } from 'framer-motion';
-const Hero = () => {
+const Hero = ({ dataAllWords, dataAllCategories }) => {
   const [isImg_1Active, setIsImg_1Active] = useState(false);
   const [isImg_2Active, setIsImg_2Active] = useState(false);
 
@@ -147,7 +147,7 @@ const Hero = () => {
 
           <div className={styles.text_container}>
             <Link href={'/preliminaries'} className={styles.title}>
-              <h2>Preliminaries</h2>
+              <h2>{dataAllCategories[0]?.name}</h2>
             </Link>
             <div className={styles.desc}>
               <p>How to Find out about the Rulings of Islam</p>

@@ -5,14 +5,10 @@ import Sections from './sections'
 import Sections2 from './sections2'
 import HowTo from './HowTo'
 import Footer from './Footer';
-import styles from './index.module.scss'
-import { useRouter } from 'next/router'
-import { useMenu } from '@/contexts/MenuContext'
 
-const Home = ({ dataAllCategories, dataPreliminaries, dataAllLangs }) => {
-  const { locale } = useRouter();
-  const router = useRouter();
-  const { menulang, setMenuLang, searchMenu, setSearchMenu } = useMenu();
+const Home = ({ dataAllCategories, dataPreliminaries, dataAllLangs, dataAllSettings, dataAllWords }) => {
+
+  const dir = dataAllSettings?.dir;
 
   const getPTagContent2 = (htmlString) => {
     const parser = new DOMParser();
@@ -27,21 +23,13 @@ const Home = ({ dataAllCategories, dataPreliminaries, dataAllLangs }) => {
 
   return (
     <>
-      <Navbar dataAllLangs={dataAllLangs} />
-      <Hero />
-      <Sections dataPreliminaries={dataPreliminaries} />
-      <Sections2 dataAllCategories={dataAllCategories} />
-      <HowTo />
-      <Footer dataAllLangs={dataAllLangs} dataAllCategories={dataAllCategories} />
+      <Navbar dataAllLangs={dataAllLangs} dataAllSettings={dataAllSettings} dir={dir} />
+      <Hero dataAllSettings={dataAllSettings} dataAllCategories={dataAllCategories} />
+      <Sections dataPreliminaries={dataPreliminaries} dataAllSettings={dataAllSettings} dataAllWords={dataAllWords} />
+      <Sections2 dataAllCategories={dataAllCategories} dataAllSettings={dataAllSettings} />
+      <HowTo dataAllSettings={dataAllSettings} />
+      <Footer dataAllLangs={dataAllLangs} dataAllCategories={dataAllCategories} dataAllSettings={dataAllSettings} dir={dir} />
 
-
-
-
-
-      <div className="container">
-
-        {/* <div className={"Hollaaaa"} dangerouslySetInnerHTML={{ __html: getPTagContent2(data) }} dir={'rtl'}></div> */}
-      </div>
 
 
     </>

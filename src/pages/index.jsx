@@ -1,7 +1,6 @@
 import Head from "next/head";
 import { Poppins } from "next/font/google";
 import Home from "@/components/Home";
-import { useMenu } from "@/contexts/MenuContext";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -9,16 +8,12 @@ const poppins = Poppins({
   style: ["normal"],
 });
 
-export default function App({ dataAllSections, dataPreliminaries, dataAllCategories, dataAllLangs, }) {
-
-
-  const { menulang, setMenuLang, searchMenu, setSearchMenu } = useMenu();
-
+export default function App({ dataAllSections, dataPreliminaries, dataAllCategories, dataAllLangs, dataAllSettings, dataAllWords }) {
   const imagePath = '/favicon.ico'
   return (
     <>
       <Head>
-        <title>New muslim guide</title>
+        <title>{dataAllSettings?.site_name}</title>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
@@ -66,7 +61,7 @@ export default function App({ dataAllSections, dataPreliminaries, dataAllCategor
       </Head>
 
       <main className={` ${poppins.className}`}>
-        <Home dataAllSections={dataAllSections} dataPreliminaries={dataPreliminaries} dataAllCategories={dataAllCategories} dataAllLangs={dataAllLangs} />
+        <Home dataAllSettings={dataAllSettings} dataAllSections={dataAllSections} dataPreliminaries={dataPreliminaries} dataAllCategories={dataAllCategories} dataAllLangs={dataAllLangs} dataAllWords={dataAllWords} />
 
       </main>
 
@@ -122,6 +117,15 @@ export async function getStaticProps({ locale }) {
   });
   const dataAllCategories = await resDataAllCategories.json()
 
+  const resAllWords = await fetch(`${apiDomain}/get-trans`, {
+    method: 'GET',
+    headers: {
+      "locale": locale,
+    },
+
+  });
+  const dataAllWords = await resAllWords.json()
+
 
   return {
     props: {
@@ -130,6 +134,7 @@ export async function getStaticProps({ locale }) {
       dataAllLangs: dataAllLangs?.data,
       dataAllSettings: dataAllSettings?.data,
       dataAllCategories: dataAllCategories.data || [],
+      dataAllWords
     },
     revalidate: 10
   };
